@@ -382,11 +382,15 @@ if (NOT EMSCRIPTEN)
     ${USES_TERMINAL}
   )
 
-  # install
+  # install tools
   if (BUILD_TOOLS OR BUILD_TESTS)
     install(TARGETS ${WABT_EXECUTABLES} DESTINATION bin)
   endif ()
 
+  # install library
+  #target_include_directories(libwabt INTERFACE $<BUILD_INTERFACE:src>$<INSTALL_INTERFACE:include>)
+  install(TARGETS wabt DESTINATION ${CMAKE_INSTALL_LIBRARYDIR})
+  install(FILES "src/*.h" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 else ()
   # emscripten stuff
 
